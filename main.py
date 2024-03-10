@@ -37,11 +37,28 @@ def game():
         ball.sety(ball.ycor() + ball.speedy)
         if abs(ball.ycor()) > 290:
             ball.speedy = -ball.speedy
+        
+        if ball.xcor() <= -440:
+            score.writescore(2)
+            resetgame()
+        elif ball.xcor() >= 440:
+            score.writescore(1)
+            resetgame()
+
         if ball.xcor() <= -420 and ball.ycor() < player1.ycor() + 50 and ball.ycor() > player1.ycor() - 50:
             ball.speedx = -ball.speedx
         if ball.xcor() >= 420 and ball.ycor() < player2.ycor() + 50 and ball.ycor() > player2.ycor() - 50:
             ball.speedx = -ball.speedx
 
+        if ball.ycor() > player2.ycor() + 50:
+            player2.up()
+        if ball.ycor() < player2.ycor() - 50:
+            player2.down()
+
+def resetgame():
+    ball.goto(0,0)
+    screen.update()
+    time.sleep(2.5)
 
 def main():
     setup()
